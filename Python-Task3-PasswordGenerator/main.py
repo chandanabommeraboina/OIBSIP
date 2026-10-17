@@ -28,7 +28,7 @@ from typing import List, Dict, Tuple, Optional
 # ==============================================================================
 STUDENT_NAME = "Chandana"
 ASSIGNED_TRACK = "Python Programming"
-TASK_TITLE = "Task 3 – Random Password Generator"
+TASK_TITLE = "Task 3 - Random Password Generator"
 ORGANIZATION = "Oasis Infobyte"
 
 # Character set definitions
