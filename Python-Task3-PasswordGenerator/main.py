@@ -411,24 +411,31 @@ def launch_gui() -> None:
 
     root = tk.Tk()
     root.title(f"{TASK_TITLE} - {STUDENT_NAME} ({ORGANIZATION})")
-    root.geometry("640x720")
-    root.minsize(580, 680)
+    root.geometry("620x560")
+    root.minsize(560, 480)
+
+    # Center window on screen
+    root.update_idletasks()
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+    x = max(0, (screen_width - 620) // 2)
+    y = max(0, (screen_height - 590) // 2)
+    root.geometry(f"620x560+{x}+{y}")
 
     # Style configuration
     style = ttk.Style(root)
-    # Use available theme if possible
     available_themes = style.theme_names()
     if "clam" in available_themes:
         style.theme_use("clam")
 
     # Top Header Banner
-    header_frame = tk.Frame(root, bg="#1e293b", pady=12)
+    header_frame = tk.Frame(root, bg="#1e293b", pady=8)
     header_frame.pack(fill="x")
 
     lbl_org = tk.Label(
         header_frame,
         text=f"{ORGANIZATION.upper()} SIP - {ASSIGNED_TRACK.upper()}",
-        font=("Segoe UI", 10, "bold"),
+        font=("Segoe UI", 9, "bold"),
         fg="#94a3b8",
         bg="#1e293b"
     )
@@ -437,11 +444,11 @@ def launch_gui() -> None:
     lbl_title = tk.Label(
         header_frame,
         text=TASK_TITLE,
-        font=("Segoe UI", 15, "bold"),
+        font=("Segoe UI", 13, "bold"),
         fg="#ffffff",
         bg="#1e293b"
     )
-    lbl_title.pack(pady=2)
+    lbl_title.pack(pady=1)
 
     lbl_student = tk.Label(
         header_frame,
@@ -452,140 +459,71 @@ def launch_gui() -> None:
     )
     lbl_student.pack()
 
-    # Main Scrollable / Padded Container
-    container = ttk.Frame(root, padding="16")
+    # Main Container
+    container = ttk.Frame(root, padding="10")
     container.pack(fill="both", expand=True)
 
-    # Section 1: Password Length
-    length_frame = ttk.LabelFrame(container, text=" 1. Password Length ", padding="10")
-    length_frame.pack(fill="x", pady=6)
+    # --- Section 1: Password Length ---
+    len_frame = ttk.LabelFrame(container, text=" 1. Password Length ", padding="6")
+    len_frame.pack(fill="x", pady=2)
 
-    lbl_len_info = ttk.Label(
-        length_frame,
-        text=f"Desired Length (Minimum {MIN_PASSWORD_LENGTH} characters required):"
-    )
-    lbl_len_info.pack(anchor="w")
+    len_ctrl = ttk.Frame(len_frame)
+    len_ctrl.pack(fill="x")
 
-    length_ctrl_frame = ttk.Frame(length_frame)
-    length_ctrl_frame.pack(fill="x", pady=4)
+    ttk.Label(len_ctrl, text=f"Length (min {MIN_PASSWORD_LENGTH}): ").pack(side="left")
 
     length_var = tk.IntVar(value=12)
     length_spin = ttk.Spinbox(
-        length_ctrl_frame,
+        len_ctrl,
         from_=MIN_PASSWORD_LENGTH,
         to=MAX_PASSWORD_LENGTH,
         textvariable=length_var,
-        width=8,
-        font=("Segoe UI", 11)
+        width=5,
+        font=("Segoe UI", 10)
     )
-    length_spin.pack(side="left", padx=(0, 10))
+    length_spin.pack(side="left", padx=6)
 
     length_slider = ttk.Scale(
-        length_ctrl_frame,
+        len_ctrl,
         from_=MIN_PASSWORD_LENGTH,
         to=64,
         orient="horizontal",
         variable=length_var
     )
-    length_slider.pack(side="left", fill="x", expand=True)
+    length_slider.pack(side="left", fill="x", expand=True, padx=6)
 
-    # Section 2: Character Types (Require at least 2)
-    types_frame = ttk.LabelFrame(
-        container,
-        text=" 2. Character Criteria (Select at least 2) ",
-        padding="10"
-    )
-    types_frame.pack(fill="x", pady=6)
+    # --- Section 2: Character Criteria (2 Columns) ---
+    types_frame = ttk.LabelFrame(container, text=" 2. Character Criteria (Select at least 2) ", padding="6")
+    types_frame.pack(fill="x", pady=2)
 
     var_upper = tk.BooleanVar(value=True)
     var_lower = tk.BooleanVar(value=True)
     var_digits = tk.BooleanVar(value=True)
     var_symbols = tk.BooleanVar(value=True)
-
-    chk_upper = ttk.Checkbutton(types_frame, text="Uppercase Letters (A – Z)", variable=var_upper)
-    chk_upper.pack(anchor="w", pady=2)
-
-    chk_lower = ttk.Checkbutton(types_frame, text="Lowercase Letters (a – z)", variable=var_lower)
-    chk_lower.pack(anchor="w", pady=2)
-
-    chk_digits = ttk.Checkbutton(types_frame, text="Numbers (0 – 9)", variable=var_digits)
-    chk_digits.pack(anchor="w", pady=2)
-
-    chk_symbols = ttk.Checkbutton(types_frame, text="Symbols (!@#$%^&*()-_=+)", variable=var_symbols)
-    chk_symbols.pack(anchor="w", pady=2)
-
-    # Section 3: Advanced Options
-    adv_frame = ttk.LabelFrame(container, text=" 3. Advanced Options ", padding="10")
-    adv_frame.pack(fill="x", pady=6)
-
     var_ambiguous = tk.BooleanVar(value=False)
-    chk_ambiguous = ttk.Checkbutton(
-        adv_frame,
-        text="Exclude Ambiguous Characters (0, O, 1, l, I)",
-        variable=var_ambiguous
-    )
-    chk_ambiguous.pack(anchor="w")
 
-    # Section 4: Result & Strength
-    result_frame = ttk.LabelFrame(container, text=" 4. Generated Password & Security ", padding="10")
-    result_frame.pack(fill="x", pady=6)
+    grid_box = ttk.Frame(types_frame)
+    grid_box.pack(fill="x")
 
-    password_var = tk.StringVar(value="")
-    entry_pwd = ttk.Entry(
-        result_frame,
-        textvariable=password_var,
-        font=("Consolas", 13, "bold"),
-        justify="center"
-    )
-    entry_pwd.pack(fill="x", pady=4)
+    chk_upper = ttk.Checkbutton(grid_box, text="Uppercase (A-Z)", variable=var_upper)
+    chk_upper.grid(row=0, column=0, sticky="w", padx=12, pady=1)
 
-    status_row = ttk.Frame(result_frame)
-    status_row.pack(fill="x", pady=2)
+    chk_digits = ttk.Checkbutton(grid_box, text="Numbers (0-9)", variable=var_digits)
+    chk_digits.grid(row=0, column=1, sticky="w", padx=12, pady=1)
 
-    lbl_strength_title = ttk.Label(status_row, text="Strength: ", font=("Segoe UI", 9, "bold"))
-    lbl_strength_title.pack(side="left")
+    chk_lower = ttk.Checkbutton(grid_box, text="Lowercase (a-z)", variable=var_lower)
+    chk_lower.grid(row=1, column=0, sticky="w", padx=12, pady=1)
 
-    lbl_strength_val = tk.Label(
-        status_row,
-        text="None",
-        font=("Segoe UI", 9, "bold"),
-        fg="#64748b",
-        bg="#f1f5f9",
-        padx=8,
-        pady=2
-    )
-    lbl_strength_val.pack(side="left", padx=4)
+    chk_symbols = ttk.Checkbutton(grid_box, text="Symbols (!@#$%^&*()-_=+)", variable=var_symbols)
+    chk_symbols.grid(row=1, column=1, sticky="w", padx=12, pady=1)
 
-    lbl_msg = ttk.Label(result_frame, text="", foreground="red")
-    lbl_msg.pack(anchor="w", pady=2)
+    chk_ambiguous = ttk.Checkbutton(types_frame, text="Exclude Ambiguous Characters (0, O, 1, l, I)", variable=var_ambiguous)
+    chk_ambiguous.pack(anchor="w", padx=12, pady=(2, 1))
 
-    # Section 5: Session History Display
-    hist_frame = ttk.LabelFrame(container, text=" Session History (Last 5 - Current Session Only) ", padding="6")
-    hist_frame.pack(fill="both", expand=True, pady=6)
+    # --- Section 3: Prominent Action Buttons Bar (Always Visible In Center!) ---
+    btn_bar = tk.Frame(container, pady=5)
+    btn_bar.pack(fill="x")
 
-    hist_listbox = tk.Listbox(
-        hist_frame,
-        height=4,
-        font=("Consolas", 9),
-        bg="#f8fafc",
-        fg="#0f172a",
-        selectbackground="#cbd5e1"
-    )
-    hist_listbox.pack(fill="both", expand=True)
-
-    def refresh_history_ui() -> None:
-        """Refresh the GUI history listbox from in-memory session records."""
-        hist_listbox.delete(0, tk.END)
-        for idx, rec in enumerate(session_history.get_all(), 1):
-            hist_listbox.insert(
-                tk.END,
-                f" {idx}. [{rec['strength']}] (len={rec['length']}) {rec['password']}"
-            )
-
-    # Initial history population
-    refresh_history_ui()
-
-    # Handlers
     def on_generate() -> None:
         """Handle Generate Password button click."""
         lbl_msg.config(text="")
@@ -609,11 +547,10 @@ def launch_gui() -> None:
             session_history.add(pwd, strength, length)
             refresh_history_ui()
 
-            # Update strength badge color
             strength_colors = {
-                "Strong": ("#16a34a", "#dcfce7"),  # Green text / light green bg
-                "Medium": ("#d97706", "#fef3c7"),  # Amber text / light yellow bg
-                "Weak":   ("#dc2626", "#fee2e2"),  # Red text / light red bg
+                "Strong": ("#16a34a", "#dcfce7"),
+                "Medium": ("#d97706", "#fef3c7"),
+                "Weak":   ("#dc2626", "#fee2e2"),
             }
             fg_col, bg_col = strength_colors.get(strength, ("#0f172a", "#f1f5f9"))
             lbl_strength_val.config(text=strength.upper(), fg=fg_col, bg=bg_col)
@@ -632,36 +569,33 @@ def launch_gui() -> None:
         root.clipboard_append(current_pwd)
         lbl_msg.config(text="Copied to clipboard successfully!", foreground="#0284c7")
 
-    # Action Buttons Bar
-    btn_bar = ttk.Frame(container)
-    btn_bar.pack(fill="x", pady=6)
-
     btn_generate = tk.Button(
         btn_bar,
-        text="Generate Password",
+        text="GENERATE PASSWORD",
         command=on_generate,
         font=("Segoe UI", 10, "bold"),
         bg="#2563eb",
         fg="#ffffff",
         activebackground="#1d4ed8",
         activeforeground="#ffffff",
-        padx=14,
-        pady=6,
+        padx=18,
+        pady=7,
         relief="flat",
         cursor="hand2"
     )
-    btn_generate.pack(side="left", padx=4)
+    btn_generate.pack(side="left", padx=(0, 8))
 
     btn_copy = tk.Button(
         btn_bar,
         text="Copy to Clipboard",
         command=on_copy,
-        font=("Segoe UI", 10),
-        bg="#e2e8f0",
-        fg="#0f172a",
-        activebackground="#cbd5e1",
+        font=("Segoe UI", 9, "bold"),
+        bg="#0284c7",
+        fg="#ffffff",
+        activebackground="#0369a1",
+        activeforeground="#ffffff",
         padx=12,
-        pady=6,
+        pady=7,
         relief="flat",
         cursor="hand2"
     )
@@ -669,21 +603,74 @@ def launch_gui() -> None:
 
     btn_close = tk.Button(
         btn_bar,
-        text="Close Window",
+        text="Close",
         command=root.destroy,
-        font=("Segoe UI", 10),
+        font=("Segoe UI", 9),
         bg="#f1f5f9",
         fg="#475569",
         padx=10,
-        pady=6,
+        pady=7,
         relief="flat",
         cursor="hand2"
     )
-    btn_close.pack(side="right", padx=4)
+    btn_close.pack(side="right")
 
-    # Generate an initial password when window opens
+    # --- Section 4: Generated Password Display ---
+    result_frame = ttk.LabelFrame(container, text=" 3. Generated Password ", padding="6")
+    result_frame.pack(fill="x", pady=2)
+
+    password_var = tk.StringVar(value="")
+    entry_pwd = ttk.Entry(
+        result_frame,
+        textvariable=password_var,
+        font=("Consolas", 13, "bold"),
+        justify="center"
+    )
+    entry_pwd.pack(fill="x", pady=2)
+
+    status_row = ttk.Frame(result_frame)
+    status_row.pack(fill="x", pady=1)
+
+    ttk.Label(status_row, text="Strength: ", font=("Segoe UI", 9, "bold")).pack(side="left")
+    lbl_strength_val = tk.Label(
+        status_row,
+        text="NONE",
+        font=("Segoe UI", 9, "bold"),
+        fg="#64748b",
+        bg="#f1f5f9",
+        padx=6,
+        pady=1
+    )
+    lbl_strength_val.pack(side="left", padx=4)
+
+    lbl_msg = ttk.Label(result_frame, text="", foreground="red", font=("Segoe UI", 9))
+    lbl_msg.pack(anchor="w", pady=1)
+
+    # --- Section 5: Session History ---
+    hist_frame = ttk.LabelFrame(container, text=" 4. Session History (Last 5 - Current Session Only) ", padding="4")
+    hist_frame.pack(fill="both", expand=True, pady=2)
+
+    hist_listbox = tk.Listbox(
+        hist_frame,
+        height=3,
+        font=("Consolas", 9),
+        bg="#f8fafc",
+        fg="#0f172a",
+        selectbackground="#cbd5e1"
+    )
+    hist_listbox.pack(fill="both", expand=True)
+
+    def refresh_history_ui() -> None:
+        """Refresh the GUI history listbox from in-memory session records."""
+        hist_listbox.delete(0, tk.END)
+        for idx, rec in enumerate(session_history.get_all(), 1):
+            hist_listbox.insert(
+                tk.END,
+                f" {idx}. [{rec['strength']}] (len={rec['length']}) {rec['password']}"
+            )
+
+    refresh_history_ui()
     on_generate()
-
     root.mainloop()
 
 
