@@ -1,0 +1,3 @@
+# Dependencies for Oasis Infobyte Task 4: Basic Weather App
+requests>=2.31.0
+python-dotenv>=1.0.0

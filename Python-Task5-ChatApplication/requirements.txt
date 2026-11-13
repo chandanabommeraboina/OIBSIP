@@ -1,0 +1,15 @@
+# Oasis Infobyte Python Internship - Task 5: Chat Application
+# Dependencies & Requirements
+
+# This project is intentionally engineered using Python's built-in Standard Library
+# to guarantee maximum cross-platform compatibility without external C-compiler issues:
+# - socket (TCP client-server networking)
+# - threading (Concurrent multi-connection handling & non-blocking GUI)
+# - tkinter (GUI desktop interface with ttk styling)
+# - sqlite3 (ACID-compliant relational database persistence)
+# - hashlib & hmac (PBKDF2-SHA256 cryptographic password hashing)
+# - json (Structured bidirectional packet framing protocol)
+# - queue (Thread-safe background-to-GUI communication)
+
+# Python 3.8+ is recommended (Python 3.10+ / 3.14 supported out of the box).
+# No external pip dependencies are required to run the core chat application.

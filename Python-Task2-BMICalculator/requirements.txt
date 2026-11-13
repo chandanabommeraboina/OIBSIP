@@ -1,0 +1,14 @@
+# ==============================================================================
+# Oasis Infobyte SIP - Python Programming Internship
+# Task 2: BMI Calculator
+# Dependencies file
+# ==============================================================================
+# External package required for BMI historical trend visualization:
+matplotlib>=3.10.0
+
+# Built-in Standard Library Modules Used (No installation required):
+# - tkinter  (Desktop GUI interface and themed widgets)
+# - sqlite3  (Embedded local relational database storage)
+# - datetime (Timestamp logging for historical records)
+# - typing   (Type hinting annotations for code clarity)
+# - os, sys  (System paths and command-line dispatch)

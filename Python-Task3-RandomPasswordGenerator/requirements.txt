@@ -1,0 +1,5 @@
+# Oasis Infobyte SIP - Python Programming Internship
+# Task 3: Random Password Generator
+# Python Standard Library only (Python 3.8+)
+# No external third-party dependencies required.
+# Built-in modules used: secrets, string, collections, tkinter, unittest

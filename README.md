@@ -1,248 +1,209 @@
-# Oasis Infobyte SIP - Python Programming Internship
+# Oasis Infobyte (OIBSIP) — Python Programming Internship
 
-## Task 3: Random Password Generator
+![Python Version](https://img.shields.io/badge/Python-3.8%2B-blue.svg?logo=python&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Completed-success.svg)
+![Track](https://img.shields.io/badge/Internship-Python%20Programming-orange.svg)
+![Organization](https://img.shields.io/badge/Organization-Oasis%20Infobyte-brightgreen.svg)
+![Verified Tests](https://img.shields.io/badge/Tests-54%2F54%20Passing%20(100%25)-success.svg)
+
+Welcome to the official repository for the **Oasis Infobyte Internship in Python Programming (OIBSIP)**. This repository contains the complete source code, documentation, test suites, and deliverables for all **five internship tasks**, structured in accordance with the official Oasis Infobyte submission guidelines.
+
+---
+
+## 👨‍💻 Intern Profile
 
 | Field | Details |
 | :--- | :--- |
 | **Intern Name** | Chandana |
 | **Internship Track** | Python Programming |
-| **Task Title** | Task 3 - Random Password Generator |
-| **Organization** | Oasis Infobyte (OIBSIP) |
-| **Operating System** | Windows 11 |
-| **Language** | Python 3 (Standard Library Only) |
-| **Repository Name** | `OIBSIP` |
-| **Task Folder** | `Python-Task3-PasswordGenerator` |
+| **Internship Domain** | Software Development / Python |
+| **Host Organization** | Oasis Infobyte |
+| **Submission Repository** | [OIBSIP](https://github.com/chandanabommeraboina/OIBSIP) |
+| **Operating System** | Microsoft Windows 11 (64-bit) |
+| **Primary Language** | Python 3 (Python 3.10 – 3.14) |
 
 ---
 
-## 1. Project Overview & Objective
+## 📂 Repository Structure
 
-The objective of this project is to build a robust, cryptographically secure **Random Password Generator** application developed in Python. The generator allows users to produce custom, high-entropy passwords tailored to specific length, complexity, and character-type requirements.
-
-The application strictly implements every mandatory feature outlined in the **Oasis Infobyte Python Programming Task 3 checklist**, complemented by advanced security and usability features such as cryptographic shuffling, password strength evaluation, ambiguous character exclusion, session-only history tracking, and dual-interface accessibility (CLI and native Tkinter GUI).
-
----
-
-## 2. Features Implemented
-
-### Required Core Features
-
-- [x] **Configurable Password Length**: Users can define any custom password length.
-- [x] **Minimum Length Enforcement**: Enforces a strict minimum password length of **8 characters** to prevent weak, easily crackable passwords.
-- [x] **Four Character Type Options**:
-  - **Uppercase Letters**: `A–Z`
-  - **Lowercase Letters**: `a–z`
-  - **Numbers**: `0–9`
-  - **Symbols**: `!@#$%^&*()-_=+`
-- [x] **Character Diversity Requirement**: Requires the selection of **at least 2 character types** before generation can proceed.
-- [x] **Guaranteed Character Inclusion**: Mathematically and programmatically guarantees that every generated password contains at least one character from *each* selected character category.
-- [x] **Cryptographic Security**: Employs Python's built-in `secrets` module (`secrets.choice` and `secrets.SystemRandom().shuffle`) instead of pseudorandom `random` to safeguard against predictability and brute-force guessing.
-- [x] **Robust Input Validation**: Gracefully handles non-numeric lengths, decimal/negative values, lengths below 8, lengths exceeding safe limits, and insufficient character set selections without crashing.
-- [x] **Continuous Session Loop**: Allows users to generate multiple passwords sequentially without having to restart the application.
-- [x] **Clear Status & Error Feedback**: Provides informative, user-friendly messages for invalid entries and successful password generation.
-
-### Advanced Features Implemented
-
-- [x] **Password Strength Evaluation**: Classifies generated passwords into `Weak`, `Medium`, or `Strong` based on total length and character diversity.
-- [x] **Ambiguous Character Exclusion**: Provides an option to filter out visually confusing characters (`0`, `O`, `1`, `l`, `I`) to prevent transcription errors.
-- [x] **In-Memory Session History**: Retains the last five generated passwords during the current active session only.
-- [x] **Zero Disk Persistence**: In accordance with privacy and security standards, passwords are never stored in a file, database, or external cache.
-- [x] **Dual Interface (CLI & GUI)**: Includes both an interactive Command-Line Interface (CLI) and a native Graphical User Interface (GUI) powered by Python's standard `tkinter` library.
-- [x] **Clipboard Integration**: Enables one-click password copying in GUI mode using native window clipboard methods.
-
-### Optional Features Intentionally Not Implemented
-
-- **Persistent Disk / Database Storage**: Storing plain-text passwords permanently on disk is a recognized security vulnerability; hence, persistence was omitted by design.
-- **Third-Party Paid API Integration**: Excluded to ensure the project remains lightweight, privacy-preserving, and free of external API key dependencies.
-
----
-
-## 3. Technologies Used
-
-- **Programming Language**: Python 3.14 (Compatible with Python 3.8+)
-- **Cryptographic Engine**: Python standard library `secrets` (OS-level CSPRNG)
-- **Character Definitions**: Python standard library `string`
-- **Session Management**: Python standard library `collections.deque`
-- **Graphical Interface**: Python standard library `tkinter` and `tkinter.ttk`
-- **Operating Environment**: Microsoft Windows 11 (64-bit)
-- **External Dependencies**: None (100% standard library)
-
----
-
-## 4. Project Directory Structure
+The projects are organized into dedicated task folders with clean modular code, automated test suites, requirements specifications, and comprehensive documentation:
 
 ```text
 OIBSIP/
-└── Python-Task3-PasswordGenerator/
-    ├── main.py              # Main application source code (CLI & GUI)
-    ├── test_suite.py        # Automated test suite covering all 10 test cases
-    ├── README.md            # Comprehensive project documentation
-    └── screenshots/
-        └── demo-output.png  # Authentic screenshot of application execution
+│
+├── Python-Task1-VoiceAssistant/
+│   ├── main.py                     # Core voice assistant application
+│   ├── test_assistant.py           # Automated test suite (11 test cases)
+│   ├── requirements.txt            # Dependency list (SpeechRecognition, pyttsx3, pyaudio)
+│   └── README.md                   # Full documentation & usage guide
+│
+├── Python-Task2-BMICalculator/
+│   ├── main.py                     # Modern Tkinter GUI & BMI analytics engine
+│   ├── test_suite.py               # Automated test suite (11 test cases)
+│   ├── requirements.txt            # Dependencies (matplotlib, sqlite3)
+│   ├── bmi_history.db              # SQLite historical database seed
+│   ├── screenshots/                # Application output & trend visualizations
+│   │   ├── demo-output.png
+│   │   └── trend-graph.png
+│   └── README.md                   # Detailed project report
+│
+├── Python-Task3-RandomPasswordGenerator/
+│   ├── main.py                     # Dual-mode (CLI & Tkinter GUI) password generator
+│   ├── test_suite.py               # Automated test suite (10 test cases)
+│   ├── requirements.txt            # Standard library specification
+│   ├── screenshots/                # Application output demonstration
+│   │   └── demo-output.png
+│   └── README.md                   # Comprehensive security & design documentation
+│
+├── Python-Task4-WeatherApp/
+│   ├── main.py                     # OpenWeatherMap CLI client with live weather lookup
+│   ├── test_weather.py             # Automated unit test suite (10 test cases)
+│   ├── requirements.txt            # Dependencies (requests, python-dotenv)
+│   ├── .env.example                # Safe environment variable configuration template
+│   └── README.md                   # Detailed API documentation & execution guide
+│
+└── Python-Task5-ChatApplication/
+    ├── server.py                   # Multi-threaded TCP socket chat server
+    ├── client.py                   # Tkinter GUI real-time chat client
+    ├── database.py                 # SQLite ACID storage engine (users, rooms, messages)
+    ├── main.py                     # Unified entry point launcher
+    ├── test_chat.py                # Automated integration test suite (12 test cases)
+    ├── requirements.txt            # Standard library networking specification
+    ├── chat_app.db                 # Seed database with sample rooms and users
+    └── README.md                   # Complete protocol & architecture documentation
 ```
 
 ---
 
-## 5. Security Architecture & Input Validation
+## 🚀 Tasks Overview & Deliverables
 
-### Cryptographic Security Model
-
-Standard Python `random` uses the Mersenne Twister algorithm, which is completely deterministic and insecure for security credentials. This project strictly relies on `secrets`:
-
-1. **Random Character Selection**: Characters are chosen via `secrets.choice()`, which accesses hardware/OS entropy (`CryptGenRandom` on Windows).
-2. **Deterministic Placement Elimination**: After selecting at least one guaranteed character from each chosen type, the remaining positions are filled from the combined pool. The entire character array is then shuffled using `secrets.SystemRandom().shuffle()`. This ensures guaranteed characters do not stay at fixed index positions.
-3. **Transient Memory Policy**: History records live inside a fixed-size `collections.deque(maxlen=5)` in RAM. When the program terminates, all generated passwords are automatically wiped.
-
-### Input Validation Rules
-
-| User Input | Validation Rule | Application Behavior |
-| :--- | :--- | :--- |
-| **Password Length** | Must be an integer $\ge 8$ | Rejects non-numbers, negatives, decimals, and values $< 8$ with a clear explanatory error. |
-| **Maximum Length** | Capped at $512$ | Prevents denial-of-service / memory exhaustion. |
-| **Character Types** | Minimum of $2$ types | Prevents generation if fewer than $2$ types are checked. Prompts user to select more. |
-| **Empty Pool Check** | Pool size $> 0$ | Ensures ambiguous exclusion does not leave any selected pool empty. |
-
-### Strength Evaluation Rubric
-
-- **Weak**: Length $< 10$ characters OR only $2$ character types selected.
-- **Medium**: Length $10$–$13$ characters with $\ge 3$ types, OR length $\ge 14$ with $2$ types.
-- **Strong**: Length $\ge 14$ characters with $\ge 3$ types, OR length $\ge 12$ characters with all $4$ types.
+### [Task 1: Voice Assistant](file:///./Python-Task1-VoiceAssistant)
+- **Folder:** [`Python-Task1-VoiceAssistant/`](./Python-Task1-VoiceAssistant/)
+- **Description:** An interactive desktop voice assistant that captures voice commands via microphone, translates speech to text with Google Speech Recognition, and responds with synthetic voice output via `pyttsx3`.
+- **Key Features:**
+  - Real-time natural speech recognition with ambient noise adjustment.
+  - Text-to-speech audio feedback for all interactions.
+  - Live clock and current calendar date announcements.
+  - Automated Google search browser integration.
+  - Interactive keyboard fallback when microphone hardware is unavailable.
+- **Technologies:** `Python 3`, `speech_recognition`, `pyttsx3`, `pyaudio`, `webbrowser`.
+- **Test Status:** 11 / 11 automated unit tests passed (100%).
 
 ---
 
-## 6. Execution Instructions (Windows 11)
+### [Task 2: BMI Calculator](file:///./Python-Task2-BMICalculator)
+- **Folder:** [`Python-Task2-BMICalculator/`](./Python-Task2-BMICalculator/)
+- **Description:** A modern Graphical User Interface (GUI) desktop application for calculating Body Mass Index (BMI), categorizing health status according to WHO standards, and visualizing longitudinal weight/BMI trends.
+- **Key Features:**
+  - Metric and Imperial unit calculation support.
+  - WHO health category categorization (Underweight, Normal, Overweight, Obese).
+  - Embedded SQLite database for historical entry logging.
+  - Visual trend analytics with Matplotlib charting and color-coded BMI zones.
+- **Technologies:** `Python 3`, `tkinter`, `sqlite3`, `matplotlib`.
+- **Test Status:** 11 / 11 automated tests passed (100%).
 
-### Prerequisites
+---
 
-Ensure Python 3 is installed on your Windows 11 system. You can verify by opening PowerShell or Command Prompt and running:
+### [Task 3: Random Password Generator](file:///./Python-Task3-RandomPasswordGenerator)
+- **Folder:** [`Python-Task3-RandomPasswordGenerator/`](./Python-Task3-RandomPasswordGenerator/)
+- **Description:** A cryptographically secure random password generator offering both an interactive Command-Line Interface (CLI) and an intuitive Graphical User Interface (GUI).
+- **Key Features:**
+  - Cryptographically secure randomness powered by the OS-level `secrets` module.
+  - Guaranteed inclusion of all selected character types (uppercase, lowercase, numbers, symbols).
+  - Minimum length enforcement ($\ge 8$ characters) and strength scoring (Weak, Medium, Strong).
+  - Ambiguous character exclusion filter (`0`, `O`, `1`, `l`, `I`).
+  - One-click clipboard copy integration in GUI mode.
+- **Technologies:** `Python 3`, `secrets`, `string`, `tkinter`, `collections`.
+- **Test Status:** 10 / 10 automated test cases passed (100%).
 
-```powershell
-py --version
-# or
-python --version
+---
+
+### [Task 4: Basic Weather App](file:///./Python-Task4-WeatherApp)
+- **Folder:** [`Python-Task4-WeatherApp/`](./Python-Task4-WeatherApp/)
+- **Description:** A reliable command-line weather application that connects to the OpenWeatherMap REST API to fetch real-time atmospheric data by city name or ZIP code.
+- **Key Features:**
+  - Real-time weather data retrieval: temperature, feels-like, humidity, wind speed, pressure, and descriptions.
+  - Dual temperature scale support (Celsius and Fahrenheit).
+  - Robust error handling for network dropouts, rate limits, and invalid city queries.
+  - Secure credential management using `.env` environment variables via `python-dotenv`.
+- **Technologies:** `Python 3`, `requests`, `python-dotenv`, `OpenWeatherMap REST API`.
+- **Test Status:** 10 / 10 automated unit tests passed (100%).
+
+---
+
+### [Task 5: Real-Time Chat Application](file:///./Python-Task5-ChatApplication)
+- **Folder:** [`Python-Task5-ChatApplication/`](./Python-Task5-ChatApplication/)
+- **Description:** A full-stack, real-time multi-room client-server desktop chat application built with TCP sockets, multi-threading, SQLite database persistence, and Tkinter GUI.
+- **Key Features:**
+  - Multi-threaded TCP socket server supporting concurrent connected clients.
+  - Secure user registration and authentication with salted PBKDF2-SHA256 password hashing.
+  - Dynamic chat room creation, room joining, and broadcast isolation.
+  - Persistent chat history restored from SQLite upon joining rooms.
+  - Modern desktop chat window with emoji support, live user list, and formatted timestamps.
+- **Technologies:** `Python 3`, `socket`, `threading`, `sqlite3`, `hashlib`, `tkinter`.
+- **Test Status:** 12 / 12 automated integration tests passed (100%).
+
+---
+
+## 🧪 Comprehensive Test Summary
+
+All projects include comprehensive automated test suites using Python's `unittest` framework:
+
+| Task Folder | Project | Test Runner | Total Tests | Passed | Success Rate |
+| :--- | :--- | :--- | :---: | :---: | :---: |
+| `Python-Task1-VoiceAssistant` | Voice Assistant | `test_assistant.py` | 11 | 11 | **100%** |
+| `Python-Task2-BMICalculator` | BMI Calculator | `test_suite.py` | 11 | 11 | **100%** |
+| `Python-Task3-RandomPasswordGenerator` | Password Generator | `test_suite.py` | 10 | 10 | **100%** |
+| `Python-Task4-WeatherApp` | Weather App | `test_weather.py` | 10 | 10 | **100%** |
+| `Python-Task5-ChatApplication` | Chat Application | `test_chat.py` | 12 | 12 | **100%** |
+| **TOTAL** | **All 5 Tasks** | — | **54** | **54** | **100%** |
+
+---
+
+## 🔒 Security Best Practices & Compliance
+
+- **No Secrets or Credentials Uploaded:** All sensitive configuration values and private keys (such as OpenWeatherMap API keys) are strictly loaded via `.env` files and excluded from version control via `.gitignore`.
+- **Templates Included:** Each task requiring configuration includes a `.env.example` file outlining required parameters with safe placeholder values.
+- **Clean Repository:** No build artifacts, cache folders (`__pycache__`), virtual environments (`.venv`), or temporary IDE configs (`.vscode`, `.idea`) are tracked.
+- **Database Privacy:** Embedded SQLite databases only contain mock testing data and public seed records.
+
+---
+
+## 🛠️ Getting Started & Installation
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/chandanabommeraboina/OIBSIP.git
+cd OIBSIP
 ```
 
-### Steps to Run
+### 2. Run Any Task
+Navigate into the desired project folder and follow the instructions in its respective `README.md`:
 
-1. Open **Windows PowerShell** or **Command Prompt**.
-2. Navigate to the task directory:
-   ```powershell
-   cd "C:\Users\Chandana\OneDrive\Desktop\OIBSIP\Python-Task3-PasswordGenerator"
-   ```
+```bash
+# Example: Running Task 3 Password Generator
+cd Python-Task3-RandomPasswordGenerator
+python main.py
 
-3. **To run the Interactive Command-Line Interface (CLI):**
-   ```powershell
-   py main.py
-   # or
-   python main.py
-   ```
+# Example: Running Task 2 BMI Calculator GUI
+cd ../Python-Task2-BMICalculator
+pip install -r requirements.txt
+python main.py
 
-4. **To launch the Graphical User Interface (GUI) directly:**
-   ```powershell
-   py main.py --gui
-   # or
-   python main.py --gui
-   ```
+# Example: Running Task 4 Weather App
+cd ../Python-Task4-WeatherApp
+pip install -r requirements.txt
+cp .env.example .env   # Add your OpenWeatherMap API key
+python main.py
 
-5. **To view help and CLI options:**
-   ```powershell
-   py main.py --help
-   ```
-
-6. **To execute the automated test suite:**
-   ```powershell
-   py test_suite.py
-   ```
-
----
-
-## 7. Sample CLI Output & Demo Screenshot
-
-### Terminal Output Sample
-
-```text
-================================================================================
-           OASIS INFOBYTE SIP - PYTHON PROGRAMMING INTERNSHIP
-================================================================================
-Full Name      : Chandana
-Assigned Track : Python Programming
-Task Title     : Task 3 - Random Password Generator
-================================================================================
-
-MAIN MENU:
-  [1] Generate a Secure Password
-  [2] View Session History (Last 5 Passwords)
-  [3] Launch Graphical User Interface (GUI)
-  [4] Exit Application
-
-Enter your choice (1-4) [1]: 1
-
---- NEW PASSWORD GENERATION ---
-Enter desired password length (minimum 8): 14
-
-Select character types to include (Select at least 2):
-  1. Include Uppercase letters (A-Z)? [Y/n]: Y
-  2. Include Lowercase letters (a-z)? [Y/n]: Y
-  3. Include Numbers (0-9)? [Y/n]: Y
-  4. Include Symbols (!@#$%^&*()-_=+)? [Y/n]: Y
-
-Optional feature:
-  Exclude ambiguous characters (0, O, 1, l, I)? [y/N]: N
-
-================================================================================
-                 PASSWORD GENERATED SUCCESSFULLY
-================================================================================
- Generated Password : k7@M9=xP2$wV8#
- Password Length    : 14 characters
- Strength Rating    : [STRONG]
- Character Types    : Uppercase (A-Z), Lowercase (a-z), Numbers (0-9), Symbols (!@#$%^&*()-_=+)
- Ambiguous Excluded : No
-================================================================================
+# Example: Running Task 5 Chat Application
+cd ../Python-Task5-ChatApplication
+python server.py       # In terminal 1
+python client.py       # In terminal 2
 ```
 
-### Application Screenshot
-
-![Application Output](screenshots/demo-output.png)
-
 ---
 
-## 8. Verification & Test Suite Results
+## 📜 Acknowledgments
 
-All 10 required test cases from the Oasis Infobyte specification were executed against the code using `test_suite.py`:
-
-| # | Test Scenario | Input / Condition | Expected Result | Actual Result | Status |
-| :-: | :--- | :--- | :--- | :--- | :-: |
-| **1** | Valid password length | `length=12` | Generates 12-char password | Length 12 verified | **PASS** |
-| **2** | Password length below 8 | `length=7` | Raises `ValueError` | Rejected with error | **PASS** |
-| **3** | Non-numeric length | `length="twelve"` | Raises `ValueError` | Rejected with error | **PASS** |
-| **4** | No character types selected | 0 types enabled | Raises `ValueError` | Rejected with error | **PASS** |
-| **5** | Only one character type selected | Uppercase only | Raises `ValueError` | Rejected with error | **PASS** |
-| **6** | Two character types selected | Uppercase + Numbers | Passwords contain both, none other | 100% compliant | **PASS** |
-| **7** | All four character types selected | All 4 enabled | Passwords contain all 4 sets | 100% compliant | **PASS** |
-| **8** | Guarantee inclusion on boundary | `length=8`, 3 types | Each type present in 8 chars | Verified across 25 runs | **PASS** |
-| **9** | Multi-generation session loop | 7 sequential passwords | In-memory history capped at 5 | FIFO rolling verified | **PASS** |
-| **10** | Ambiguous exclusion | Exclude `0, O, 1, l, I` | Zero ambiguous chars in 50 runs | Verified 0 present | **PASS** |
-
-**Summary: 10/10 Tests Passed (100% Success Rate).**
-
----
-
-## 9. Limitations & Design Considerations
-
-1. **Transient History**: In-memory session history resets when the application exits. This is intentional to adhere to security best practices.
-2. **Terminal Encoding**: Standard ASCII symbols and hyphens are utilized throughout the CLI to prevent character-page rendering issues on localized Windows consoles.
-
----
-
-## 10. Submission Checklist Compliance
-
-- [x] Workspace repository named `OIBSIP`.
-- [x] Task directory named `Python-Task3-PasswordGenerator`.
-- [x] Clean source code in `main.py` with beginner-friendly modular structure and comments.
-- [x] Automated test runner in `test_suite.py`.
-- [x] Professional `README.md` with full documentation and screenshot reference.
-- [x] Verified screenshot in `screenshots/demo-output.png`.
-- [x] Student header banner displaying:
-  - **Full Name**: Chandana
-  - **Assigned Track**: Python Programming
-  - **Task Title**: Task 3 - Random Password Generator
+Developed by **Chandana** as part of the **Oasis Infobyte Python Programming Internship (OIBSIP)**. Special thanks to the mentors and coordinators at Oasis Infobyte for providing a structured learning experience and practical hands-on challenges.
